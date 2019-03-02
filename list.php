@@ -4,9 +4,13 @@
  * 2019-03-02 17:30:00
 
  * 单向链表：
-	单向链表的链表对象维护了一个 first引用，该引用指向节点链表中的第一个节点对象，每个节点对象维护一个 next 引用，next引用指向下一个节点对象；（这里注意：是引用指向的是节点对象：节点对象包含存储的数据和next引用）
-	图片地址：https://img-blog.csdn.net/20180523102549287?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3psYl9sb3Zlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70
-	相关文章：https://blog.csdn.net/zlb_lover/article/details/80415875
+ *	单向链表的链表对象维护了一个 first引用，该引用指向节点链表中的第一个节点对象，
+ *	每个节点对象维护一个 next 引用，next引用指向下一个节点对象；（这里注意：是引
+ *	用指向的是节点对象：节点对象包含存储的数据和next引用）
+ *
+ *	图片地址：https://img-blog.csdn.net/20180523102549287?watermark/2/text/aHR0cH
+ *	M6Ly9ibG9nLmNzZG4ubmV0L3psYl9sb3Zlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70
+ *	相关文章：https://blog.csdn.net/zlb_lover/article/details/80415875
  *
  */
 
