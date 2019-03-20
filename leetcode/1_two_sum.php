@@ -25,14 +25,13 @@ class Solution {
             for($j = $i + 1; $j < $count; $j++){
                 if($nums[$i] + $nums[$j] == $target){
                     $result = array($i, $j);
-		    break;
+		    return $result;
                 }
             }
 
-	    if(!empty($result)) break;
         }
         
-        return $result;
+        return ;
     }
 
     function twoSum2($nums, $target){
@@ -44,7 +43,8 @@ class Solution {
 		if($index == $i) continue;
 		return array($i, $index);	
 	    }
-	}	
+	}
+	return ;	
     }
 }
 
