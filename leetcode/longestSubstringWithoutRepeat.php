@@ -20,13 +20,13 @@ class Solution {
 	$tmp_count = array();
 	for($i = 0; $i < count($str_arr); $i++){
 		$tmp[] = $str_arr[$i];
-		for($j = 0; $j < count($tmp) - 1; $j++){
+		for($j = 0; $j < count($tmp) - 1; $j++){ //子数组跟目标数组比较，有重复的话，删掉重复之前的元素
 			if($str_arr[$i] == $tmp[$j]){
 
 				for($k = $j; $k >= 0; $k--){
 					unset($tmp[$k]);
 				}
-				$tmp = array_values($tmp);
+				$tmp = array_values($tmp);//数组下标重排
 			}
 		}
 		$tmp_count[] = count($tmp);
