@@ -14,11 +14,8 @@ class Solution {
     function isPalindrome($x) {
         $a = (string)$x;
 	$a = str_split($a);
-	//var_dump($a);
 	$b = array_reverse($a);
-	//var_dump($b);
 	$c = implode('', $b);
-	//var_dump($c);
 	$d = (int)$c;
 
 	if($x == $d){
