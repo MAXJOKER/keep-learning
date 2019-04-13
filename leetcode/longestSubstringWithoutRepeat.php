@@ -11,6 +11,7 @@ class Solution {
      * @param String $s
      * @return Integer
      * 暴力解法
+     * 时间复杂度O(n^3)
      */
     function lengthOfLongestSubstring($s) {
 	if($s == "") return 0;
@@ -35,10 +36,54 @@ class Solution {
 
 	return $count;
     }
+/**
+ * 2，3为滑动窗口解法
+ * 2是记录符合要求的子串，并取这些字串中最大的长度
+ * 3是记录符合要求的子串的最左位置（开始的位置），结束位置-开始位置+1 为符合要求子串的长度，取最大值
+ */
+
+    function solution2($s){
+	if($s == "") return 0;
+        $str_arr = str_split($s);
+	if(count($str_arr) == 1) return 1;
+	$tmp = array();
+	$max = 0;
+
+	for($i = 0; $i < count($str_arr); $i++){
+		if(in_array($str_arr[$i], $tmp)){
+			$index = array_search($str_arr[$i], $tmp);
+			$tmp = array_splice($tmp, $index + 1);
+		}
+		$tmp[] = $str_arr[$i];
+		$max = max($max, count($tmp));
+	}
+
+	return $max;
+    }
+
+    function solution3($s){
+
+	$tmp = '';
+	$left = 0;
+	$max = 0;	
+	for($i = 0; $i < strlen($s); $i++){
+		if(stripos($tmp, $s[$i]) !== false){
+			$left = max($left, strrpos($tmp, $s[$i]) + 1);
+			//var_dump($left);
+		}
+		$tmp .= $s[$i];
+		//var_dump($tmp);
+		$max = max($max, $i - $left + 1);
+	}
+
+	return $max;
+    }
 }
 
 $obj = new Solution();
-$str = "dvdfekkgquhc";
+//$str = "dvdfekkgquhc";
 //$str = "dvdf";
-$result = $obj->lengthOfLongestSubstring($str);
+$str = 'abcabcbb';
+//$result = $obj->lengthOfLongestSubstring($str);
+$result = $obj->solution3($str);
 var_dump($result);
