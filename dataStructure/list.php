@@ -38,120 +38,144 @@ class Node{
 
 }
 
-//新增
-function addNode($list, $data){
-	$cur = $list;
-	while($cur->next != null){
-		$cur = $cur->next;//确保下一节点为空
-	}
-	$node = new Node($data);
-	$cur->next = $node;
+class Lists{
 
-}
+	//新增
+	function addNode($list, $data){
+		$cur = $list;
+		while($cur->next != null){
+			$cur = $cur->next;//确保下一节点为空
+		}
+		$node = new Node($data);
+		$cur->next = $node;
 
-//遍历
-function showNode($list){
-	$cur = $list;
-	while($cur != null){
-		echo $cur->data . "\n";
-		$cur = $cur->next;
-	}
-}
-
-//遍历法
-function reverse($list){
-	if($list == null){
-		return $list;
 	}
 
-	$cur = $list;
-	$new = null;
-	
-	while($cur != null){
-		$temp = $cur->next; //保存下一个节点
-		$cur->next = $new; //断开旧节点
-		$new = $cur; //新节点
-		$cur = $temp; //下一个节点继续
-	}
-//var_dump($new);	
-	return $new;	
-}
-
-//递归
-function reverseRecrusion($list){
-	if($list->next == null){
-		return $list;
+	//遍历
+	function showNode($list){
+		$cur = $list;
+		while($cur != null){
+			echo $cur->data . "\n";
+			$cur = $cur->next;
+		}
 	}
 
-	$plist = reverseRecrusion($list->next);
-	$list->next->next = $list;
-	$list->next = null;
-	
-	return $plist;	
-}
+	//遍历法
+	function reverse($list){
+		if($list == null){
+			return $list;
+		}
 
-//链表长度
-function countNode($list){
-	$i = 0;
-	$cur = $list;
-	while($cur->next != null){
-		$i++;
-		$cur = $cur->next;
+		$cur = $list;
+		$new = null;
+		
+		while($cur != null){
+			$temp = $cur->next; //保存下一个节点
+			$cur->next = $new; //断开旧节点
+			$new = $cur; //新节点
+			$cur = $temp; //下一个节点继续
+		}
+		//var_dump($cur);	
+		return $new;	
 	}
 
-	return $i;
-}
+	//递归
+	function reverseRecrusion($list){
+		if($list->next == null){
+			return $list;
+		}
 
-//插入
-function insertNode($list, $data, $no){
-	if($no > countNode($list)){
-		return false;
+		$plist = reverseRecrusion($list->next);
+		$list->next->next = $list;
+		$list->next = null;
+		
+		return $plist;	
 	}
 
-	$cur = $list;
-	for($i = 0; $i < $no; $i++){
-		//if($i==0) var_dump($cur->data);//有0节点，但其实为null
-		$cur = $cur->next;
-	}	
-	$new = new Node($data);
-	$new->next = $cur->next;
-	$cur->next = $new;
-}
+	//链表长度
+	function countNode($list){
+		$i = 0;
+		$cur = $list;
+		while($cur->next != null){
+			$i++;
+			$cur = $cur->next;
+		}
 
-//删除
-function deleteNode($list, $no){
-	if($no > countNode($list)){
-		return false;
+		return $i;
 	}
 
-	$cur = $list;
-	for($i = 0; $i < $no-1; $i++){
-		$cur = $cur->next;	
+	//插入
+	function insertNode($list, $data, $no){
+		if($no > countNode($list)){
+			return false;
+		}
+
+		$cur = $list;
+		for($i = 0; $i < $no; $i++){
+			//if($i==0) var_dump($cur->data);//有0节点，但其实为null
+			$cur = $cur->next;
+		}	
+		$new = new Node($data);
+		$new->next = $cur->next;
+		$cur->next = $new;
 	}
 
-	$cur->next = $cur->next->next;	
+	//删除
+	function deleteNode($list, $no){
+		if($no > countNode($list)){
+			return false;
+		}
+
+		$cur = $list;
+		for($i = 0; $i < $no-1; $i++){
+			$cur = $cur->next;	
+		}
+
+		$cur->next = $cur->next->next;	
+	}
+
+	//搜索特定位置的节点
+	function searchNode($list, $no){
+		if($no < 0 || $no > $this->countNode($list) || $list->next == null) return false;
+		$cur = $list;
+		
+		$count = 0;
+		while($cur->next != null){
+			if($count == $no){
+				return $cur;
+			}
+			$count++;
+			$cur = $cur->next;
+		}		
+	}
 }
 
 //测试
 function test(){
+	$obj = new Lists();
 	$list = new Node(null);
-	addNode($list, 1);
-	addNode($list, 2);
-	addNode($list, 3);
-	addNode($list, 4);
-	addNode($list, 5);
+	$obj->addNode($list, 1);
+	$obj->addNode($list, 2);
+	$obj->addNode($list, 3);
+	$obj->addNode($list, 4);
+	$obj->addNode($list, 5);
 
-	showNode($list);
+	$obj->showNode($list);
+	
+	echo "\nsearch node: \n";
+	$re = $obj->searchNode($list, 3);
+	var_dump($re->data);
 
 	echo "\nNew NODE\n";
 	
-	//$new = reverse($list);
+	$new = $obj->reverse($list);
 	//$new = reverseRecrusion($list);
 
 	//insertNode($list, 9, 3);
-	deleteNode($list, 2); 
+	//deleteNode($list, 2); 
 
-	showNode($list);
+	//showNode($list);
+	$obj->showNode($new);
 	
 }
 
