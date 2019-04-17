@@ -46,6 +46,6 @@ class Single{
 		echo "Tomorrow will be a brand new day.\n";
 	}
 }
-
+ 
 $obj = Single::getInstance();
 $obj->test();
