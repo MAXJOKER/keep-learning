@@ -1,4 +1,7 @@
 <?php
+namespace DataStructure\Queue;
+
+use DataStructure\Lists\Lists;
 /**
  * @author junhui.zhang
  * @date 2019-04-14 23:31
@@ -12,7 +15,7 @@ interface QueueInterface{
 	public function isEmpty(); //是否为空
 	public function head(); //返回队头
 	public function clear(); //清空队列
-	public function showQueue(); //返回队列
+	public function showQueue(); //返回队列 
 }
 
 //数组实现
@@ -72,6 +75,16 @@ class QueueByArray implements QueueInterface{
 
 		return false;
 	}	
+}
+
+class QueueByList implements QueueInterface{
+	
+	private $queue;
+	
+	public function __construct(){
+		$this->queue = new Lists();
+	}
+	
 }
 
 $obj = new QueueByArray();
