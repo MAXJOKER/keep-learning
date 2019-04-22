@@ -49,7 +49,7 @@ class BinaryTree{
 			}
 		}else{
 			if($node->right == null){
-				$node->right = null;
+				$node->right = $newNode;
 			}else{
 				$this->insertNode($node->right, $newNode);
 			}
@@ -80,14 +80,13 @@ class BinaryTree{
 		if($node == null){
 			return false;
 		}
-		
 		if($val < $node->val){
 
-			$this->searchNode($node->left, $val);
+			return $this->searchNode($node->left, $val);
 
 		}else if($val > $node->val){
 		
-			$this->searchNode($node->right, $val);
+			return $this->searchNode($node->right, $val);
 
 		}else{ // $val == $node->val
 
@@ -162,3 +161,5 @@ $bTree = new BinaryTree();
 foreach ($nodes as $node) {
     $bTree->insert($node);
 }
+$result = $bTree->search(6);
+var_dump($result);
