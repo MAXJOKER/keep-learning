@@ -37,10 +37,21 @@ class BinaryTree{
 	 */
 	private $root = null;
 	
+
 	/**
 	 * 插入节点
 	 */
-	public function insertNode($node, $newNode){
+	public function insert($val){
+		$newNode = new Node($val);
+		if($this->root == null){
+			$this->root = $newNode;
+		}else{
+			$this->insertNode($this->root, $newNode);
+		}
+
+	}
+	
+	private function insertNode($node, $newNode){
 		if($newNode->val < $node->val){
 			if($node->left == null){
 				$node->left = $newNode;
@@ -57,26 +68,13 @@ class BinaryTree{
 	}
 
 	/**
-	 * 插入节点
-	 */
-	public function insert($val){
-		$newNode = new Node($val);
-		if($this->root == null){
-			$this->root = $newNode;
-		}else{
-			$this->insertNode($this->root, $newNode);
-		}
-
-	}
-
-	/**
 	 * 查询值是否在二叉树中
 	 */
 	public function search($val){
 		return $this->searchNode($this->root, $val);
 	}
 
-	public function searchNode($node, $val){
+	private function searchNode($node, $val){
 		if($node == null){
 			return false;
 		}
@@ -102,7 +100,7 @@ class BinaryTree{
 		return $this->removeNode($this->root, $val);
 	}
 
-	public function removeNode($node, $val){
+	private function removeNode($node, $val){
 		if($node == null) return null;
 
 		if($val < $node->val){
@@ -144,7 +142,7 @@ class BinaryTree{
 	/**
 	 * 获取值最小的节点
  	 */
-	public function findMinNode($node){
+	private function findMinNode($node){
 		if($node == null) return null;
 		
 		while($node && $node->left != null){
@@ -152,6 +150,98 @@ class BinaryTree{
 		}	
 
 		return $node;	
+	}
+
+	/**
+	 * 获取二叉树中最小的值
+	 */
+	public function min(){
+		return $this->minNode($this->root);
+	}
+
+	private function minNode($node){
+		if($node == null) return null;
+
+		while($node && $node->left != null){
+			$node = $node->left;
+		}
+
+		return $node->val;
+	}
+
+	/**
+	 * 获取二叉树中最大的值
+	 */
+	public function max(){
+		return $this->maxNode($this->root);
+	}
+
+	private function maxNode($node){
+		if($node == null) return null;
+
+		while($node && $node->right != null){
+			$node = $node->right;
+		}
+
+		return $node->val;
+	}
+
+	/**
+	 * 前缀遍历 中-左-右
+	 */
+	public function preOrderTraverse(){
+		$tmp = array();
+		$this->preOrderTraverseNode($this->root, $tmp);
+
+		return $tmp;
+	}
+	
+	private function preOrderTraverseNode($node, &$tmp){
+		if($node == null) return null;
+		$tmp[] = $node->val;
+		$this->preOrderTraverseNode($node->left, $tmp);
+		$this->preOrderTraverseNode($node->right, $tmp);
+		
+		return $tmp;		
+	}
+
+	/**
+	 * 中缀遍历 左-中-右
+	 */
+	public function midOrderTraverse(){
+		$tmp = array();
+		$this->midOrderTraverseNode($this->root, $tmp);
+
+		return $tmp;
+	}
+
+	private function midOrderTraverseNode($node, &$tmp){
+		if($node == null) return null;
+		$this->midOrderTraverseNode($node->left, $tmp);
+		$tmp[] = $node->val;
+		$this->midOrderTraverseNode($node->right, $tmp);
+
+		return $tmp;
+	}
+
+	/**
+	 * 后缀遍历 左-右-中
+	 */
+	public function postOrderTraverse(){
+		$tmp = array();
+		$this->postOrderTraverseNode($this->root, $tmp);
+		
+		return $tmp;
+	}
+
+	private function postOrderTraverseNode($node, &$tmp){
+		if($node == null) return null;
+
+		$this->postOrderTraverseNode($node->left, $tmp);
+		$this->postOrderTraverseNode($node->right, $tmp);
+		$tmp[] = $node->val;
+
+		return $tmp;
 	}
 }
 
@@ -161,5 +251,5 @@ $bTree = new BinaryTree();
 foreach ($nodes as $node) {
     $bTree->insert($node);
 }
-$result = $bTree->search(6);
+$result = $bTree->postOrderTraverse();
 var_dump($result);
