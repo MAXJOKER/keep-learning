@@ -243,6 +243,79 @@ class BinaryTree{
 
 		return $tmp;
 	}
+
+	/**
+	 * 置空二叉树
+	 */
+	public function unsetBinaryTree(){
+		$this->root = null;
+	}
+
+	/**
+	 * 二叉树叶子节点个数
+	 * 左叶子结点+右叶子结点
+	 */
+	public function countLeafNode(){
+		return $this->leafNum($this->root);
+	}
+
+	private function leafNum($node){
+		if($node == null) return 0;
+		if($node->left == null && $node->right == null) return 1;
+		$leftLeaf = $this->leafNum($node->left);
+		$rightLeaf = $this->leafNum($node->right);
+
+		return $leftLeaf + $rightLeaf;
+	}
+
+	/**
+	 * 二叉树节点数
+	 */
+	public function getNodes(){
+		return $this->getNodesNum($this->root);		
+	}
+
+	public function getNodesNum($node){
+		if($node == null) return 0;
+
+		return $this->getNodesNum($node->left) + $this->getNodesNum($node->right) + 1;	
+	}
+
+	/**
+	 * 二叉树深度
+	 */
+	public function maxDepth(){
+		return $this->getBinaryTreeDepth($this->root);
+	}
+
+	private function getBinaryTreeDepth($node){
+		
+		if($node == null) return 0;
+		
+		$left = $this->getBinaryTreeDepth($node->left);
+		$right = $this->getBinaryTreeDepth($node->right);
+
+		return $right > $left ? $right + 1 : $left + 1;
+	}
+
+	/**
+	 * 二叉树最小深度
+	 */
+	public function minDepth(){
+		return $this->getBinaryTreeMinDepth($this->root);
+	}
+
+	private function getBinaryTreeMinDepth($node){
+		if($node == null) return 0;
+
+		if($node->left == null) return $this->getBinaryTreeMinDepth($node->right) + 1;
+		if($node->right == null) return $this->getBinaryTreeMinDepth($node->left) + 1;
+
+		$right = $this->getBinaryTreeMinDepth($node->right);
+		$left = $this->getBinaryTreeMinDepth($node->left);
+
+		return $right < $left ? $right + 1 : $left + 1;
+	}
 }
 
 $nodes = [8, 3, 10, 1, 6, 14, 4, 7, 13];
@@ -252,4 +325,19 @@ foreach ($nodes as $node) {
     $bTree->insert($node);
 }
 $result = $bTree->postOrderTraverse();
+echo "\npost order traverse:\n";
 var_dump($result);
+$result = $bTree->minDepth();
+echo "\nmin depth:\n";
+var_dump($result);
+echo "\nleaf node numbers:\n";
+$result = $bTree->countLeafNode();
+var_dump($result);
+echo "\nall nodes number:\n";
+$result = $bTree->getNodes();
+var_dump($result);
+echo "\nunset binary tree:\n";
+$bTree->unsetBinaryTree();
+$result = $bTree->postOrderTraverse();
+var_dump($result);
+
