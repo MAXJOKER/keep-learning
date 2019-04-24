@@ -316,6 +316,24 @@ class BinaryTree{
 
 		return $right < $left ? $right + 1 : $left + 1;
 	}
+
+	/**
+	 * 第k层节点个数
+	 */
+	public function kLevelNode($k){
+		return $this->kLevelNodeNum($this->root, $k);
+	}
+
+	private function kLevelNodeNum($node, $k){
+		if($node == null || $k < 1) return 0;
+
+		if($k == 1) return 1;
+
+		$left = $this->kLevelNodeNum($node->left, $k - 1);
+		$right = $this->kLevelNodeNum($node->right, $k - 1);
+
+		return $left + $right;
+	}
 }
 
 $nodes = [8, 3, 10, 1, 6, 14, 4, 7, 13];
@@ -335,6 +353,9 @@ $result = $bTree->countLeafNode();
 var_dump($result);
 echo "\nall nodes number:\n";
 $result = $bTree->getNodes();
+var_dump($result);
+echo "\nk level node number:\n";
+$result = $bTree->kLevelNode(3);
 var_dump($result);
 echo "\nunset binary tree:\n";
 $bTree->unsetBinaryTree();
