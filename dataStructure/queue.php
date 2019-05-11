@@ -76,7 +76,7 @@ class QueueByArray implements QueueInterface{
 		return false;
 	}	
 }
-
+/*
 class QueueByList implements QueueInterface{
 	
 	private $queue;
@@ -86,6 +86,7 @@ class QueueByList implements QueueInterface{
 	}
 	
 }
+*/
 
 $obj = new QueueByArray();
 for($i = 0; $i < 10; $i++){
