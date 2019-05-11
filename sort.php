@@ -81,8 +81,8 @@ function insertSort($arr){
  * 快速排序的思想是分冶法。
  * 取数组中间值=>遍历数组剩余元素=>小于中间值的放左边，
  * 大于中间值的放右边=>将左右循环如此直至不可再分->将已排好的合并
- * 时间复杂度 o(nlog2(n))
- * 空间复杂度 o(nlog2(n))
+ * 时间复杂度 o(nlogn) 最坏情况o(n^2)
+ * 空间复杂度 o(nlogn)
  */
 function quickSort($arr){
 
