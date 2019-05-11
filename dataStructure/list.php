@@ -1,4 +1,5 @@
 <?php
+namespace DataStructure\Lists;
 /**
  * @desc: 链表
  * @date: 2019-03-02 17:30:00
