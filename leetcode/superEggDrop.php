@@ -11,7 +11,7 @@ class Solution {
      * @param Integer $K
      * @param Integer $N
      * @return Integer
-     * // TODO 待解决
+     * // TODO  待解决
      */
     function superEggDrop($K, $N) {
 	if($K == 1 || $N == 1) return $N;
