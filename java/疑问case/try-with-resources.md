@@ -19,3 +19,8 @@ try {
 
 这个例子中，br.readLine() 和 br.close() 都会抛出异常。如果 finally 中出现异常，那么 try-catch 中抛出的异常将会被抑制，捕获不到try-catch中的异常。而且如果有多个资源需要被关闭，那么代码处理将会变得复杂。
 
+
+参考文章：
+https://www.baeldung.com/java-try-with-resources
+https://www.cnblogs.com/xhj123/p/12578419.html
+
