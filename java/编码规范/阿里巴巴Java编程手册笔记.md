@@ -130,7 +130,20 @@ return obj;
 8. 不要写一个大而全的数据更新接口。传入为 POJO 类，不管是不是自己的目标更新字段，都进行 update table set c1=value1,c2=value2,c3=value3; 这是不对的。执行 SQL时，不要更新无改动的字段，一是易出错；二是效率低；三是增加 binlog 存储。
 
 ### 工程结构
-1. 分层领域模型规约：
+1. 应用分层
+   
+   ![alt 结构](https://raw.githubusercontent.com/MAXJOKER/keep-learning/0fcf60ab38d6c40c8f5770f5a0c397ecd7c5ca5d/image/%E5%BA%94%E7%94%A8%E5%88%86%E5%B1%82.png)
+   * 开放接口层：可直接封装 Service 方法暴露成 RPC 接口；通过 Web 封装成 http 接口；进行网关安全控制、流量控制等。
+   * 终端显示层：各个端的模板渲染并执行显示的层。当前主要是 velocity 渲染，JS 渲染，JSP 渲染，移动端展示等。
+   * Web 层：主要是对访问控制进行转发，各类基本参数校验，或者不复用的业务简单处理等。
+   * Service 层：相对具体的业务逻辑服务层。
+   * Manager 层：通用业务处理层，它有如下特征：
+      - 1） 对第三方平台封装的层，预处理返回结果及转化异常信息；
+      - 2） 对 Service 层通用能力的下沉，如缓存方案、中间件通用处理；
+      - 3） 与 DAO 层交互，对多个 DAO 的组合复用。
+   * DAO 层：数据访问层，与底层 MySQL、Oracle、Hbase 等进行数据交互。
+   * 外部接口或第三方平台：包括其它部门 RPC 开放接口，基础平台，其它公司的 HTTP 接口。
+2. 分层领域模型规约：
    * DO（Data Object）：此对象与数据库表结构一一对应，通过 DAO 层向上传输数据源对象。
    * DTO（Data Transfer Object）：数据传输对象，Service 或 Manager 向外传输的对象。
    * BO（Business Object）：业务对象，由 Service 层输出的封装业务逻辑的对象。
