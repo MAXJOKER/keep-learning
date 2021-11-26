@@ -20,10 +20,12 @@
 ### 淘汰策略 ###
 <hr/>
 redis提供了**六种淘汰策略**，其中默认的是 **noeviction**，如下：
+
 ```
 2.8 及以前的版本默认的淘汰策略是：volatile-lru
 3.0 及以后的版本的默认淘汰策略是：noeviction
 ```
+
 * <font color=red>noeviction</font>**（默认策略）**：当内存大小达到阀值时，所有申请内存的指令都会报错。
 * <font color=red>allkeys-lru</font>：所有key都使用**LRU算法**进行淘汰。
 * <font color=red>volatile-lru</font>：所有**设置了过期时间的key**使用LRU算法进行淘汰。
