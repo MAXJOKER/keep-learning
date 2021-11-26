@@ -85,6 +85,7 @@ LFU算法中支持 <font color=red>allkeys-lfu</font>和<font color=red>volatile
 <br>
 
 ### 删除过期键策略 ###
+<hr/>
 redis中有三种删除策略，分别是：
 1. 定时删除：创建一个定时器，定时执行对key的删除操作。
 2. 惰性删除：每次只有访问key的时候，才会检查key的过期时间，如果过期则删除key。
