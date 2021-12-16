@@ -3,10 +3,10 @@
 crontab ，用于在某个时间，系统自动执行指定的程序或者命令。
 
 crontab 参数：
-    * -e 编辑crontab
-    * -l 列出当前用户的crontab列表
-    * -r 删除用户crontab
-    * -i 与-r一起使用，询问用户是否直接删除crontab
+* -e 编辑crontab
+* -l 列出当前用户的crontab列表
+* -r 删除用户crontab
+* -i 与-r一起使用，询问用户是否直接删除crontab
 
 crontab 格式：
 ```
