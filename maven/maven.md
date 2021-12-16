@@ -27,3 +27,17 @@ Group Id, Artifact Id 保证项目的唯一性。
 
 Group Id 一般分为多段，用.分隔。 第一段为 域，org，com等，第二段为公司名称，第三段为组名... 
 Artifact Id 为项目的唯一标识符。
+
+#### 工程目录 ####
+```
+    src // 源码
+        main // 存放主程序
+            java // java源代码
+            resources // 存放框架或者其他工具的配置文件
+        test // 存放测试程序
+            java // 测试代码
+            resources // 测试配置文件
+    pom.xml  // 核心配置文件
+```
+
+pom.xml Project Object Model 项目对象模型，Maven的核心配置文件，与构建过程相关的一切设置都在这个文件进行设置。
