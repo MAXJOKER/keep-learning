@@ -41,3 +41,16 @@ Artifact Id 为项目的唯一标识符。
 ```
 
 pom.xml Project Object Model 项目对象模型，Maven的核心配置文件，与构建过程相关的一切设置都在这个文件进行设置。
+
+#### 常用命令 ####
+```
+mvn compile // 编译，将java源代码编译成class字节码文件
+
+mvn test // 测试，并生成测试报告
+
+mvn clean // 将编译的class字节码文件删除
+
+mvn package // 打包，动态web工程打 war包，java工程打 jar包
+
+mvn install // 将项目生成的jar包放在仓库中，以便别的模块调用
+```
