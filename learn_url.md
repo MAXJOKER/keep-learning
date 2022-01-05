@@ -32,3 +32,8 @@
 #### mq
 * https://github.com/apache/rocketmq/tree/master/docs/cn
 * https://bbs.huaweicloud.com/blogs/280789
+
+
+#### 牛逼的博主
+* https://www.iteye.com/blog/user/shmilyaw-hotmail-com
+* https://blog.csdn.net/qq_35190492/category_9424379.html
