@@ -30,6 +30,12 @@ public class MedianOfTwoSortedArrays {
         return middle;
     }
 
+    /**
+     * 其他题解
+     * https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-w-2/
+     * @param args
+     */
+
     public static void main(String[] args) {
         int[] nums1 = new int[0];
         int[] nums2 = new int[]{2};
