@@ -91,7 +91,42 @@ public class PermutationSequence {
         }
     }
 
+    /**
+     * 时间复杂度：O(n^2)
+     * 空间复杂度：O(n)
+     * @param n
+     * @param k
+     * @return
+     */
+    public static String getPermutation2(int n, int k) {
+        final int[] arr = new int[]{1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
+        boolean[] used = new boolean[n+1];
+        StringBuilder permutation = new StringBuilder();
+
+        for (int i = n - 1; i >= 0; i--) {
+            int cnt = arr[i];
+            for (int j = 1; j <= n; j++) {
+                if (used[j]) {
+                    continue;
+                }
+
+                // 剪枝
+                // 题解：https://leetcode-cn.com/problems/permutation-sequence/solution/hui-su-jian-zhi-python-dai-ma-java-dai-ma-by-liwei/
+                if (k > cnt) {
+                    k -= cnt;
+                    continue;
+                }
+
+                used[j] = true;
+                permutation.append(j);
+                break;
+            }
+        }
+
+        return permutation.toString();
+    }
+
     public static void main(String[] args) {
-        System.out.println(getPermutation(4,9));
+        System.out.println(getPermutation2(4,13));
     }
 }
