@@ -1,5 +1,7 @@
 package designpatterns.decorator;
 
+import java.util.Enumeration;
+
 public class Test {
     public static void main(String[] args) {
         Beverage espresso = new Espresso();
