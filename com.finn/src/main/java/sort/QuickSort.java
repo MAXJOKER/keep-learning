@@ -17,6 +17,9 @@ import java.util.Random;
  *
  * # 与归并排序比较 归并排序不管数组的内容是什么，归并排序总是一分为二地去做排序运算，然后再归并起来。
  *
+ * 时间复杂度 o(nlogn) 最坏情况o(n^2)
+ * 空间复杂度 o(nlogn)
+ *
  */
 public class QuickSort {
 
@@ -145,6 +148,10 @@ public class QuickSort {
         int lt = left + 1;
         int gt = right;
 
+
+        // 循环不变量：
+        // all in [left + 1, lt) <= pivot
+        // all in (gt, right] >= pivot
         while (true) {
             while (lt <= right && nums[lt] < pivot) {
                 lt++;
@@ -169,6 +176,54 @@ public class QuickSort {
         return gt;
     }
 
+    /**
+     * 快速排序 3：三指针快速排序
+     * @param nums
+     * @return
+     */
+    public static int[] quickSort3(int[] nums) {
+        int len = nums.length;
+        quickSort3(nums, 0, len - 1);
+        return nums;
+    }
+
+    private static void quickSort3(int[] nums, int left, int right) {
+        // 优化点：小区间使用插入排序
+        if (right - left <= INSERTION_SORT_THRESHOLD) {
+            insertionSort(nums, left, right);
+            return;
+        }
+
+        // 循环不变量：
+        // all in [left + 1, lt] < pivot
+        // all in [lt + 1, i) = pivot
+        // all in [gt, right] > pivot
+        int randomIndex = left + RANDOM.nextInt(right - left + 1);
+        swap(nums, left, randomIndex);
+        int pivot = nums[left];
+        int lt = left;
+        int gt = right + 1;
+
+        int i = left + 1;
+        while (i < gt) {
+            if (nums[i] < pivot) {
+                lt++;
+                swap(nums, i, lt);
+                i++;
+            } else if (nums[i] == pivot) {
+                i++;
+            } else {
+                gt--;
+                swap(nums, i, gt);
+            }
+        }
+
+        swap(nums, left, lt);
+        // 大大减少了两侧分治的区间
+        quickSort3(nums, left, lt - 1);
+        quickSort3(nums, gt, right);
+    }
+
     private static void swap(int[] nums, int index1, int index2) {
         if (index1 == index2) {
             return;
@@ -180,7 +235,7 @@ public class QuickSort {
 
     public static void main(String[] args) {
         int[] nums = new int[]{0,2,1,6,3,10};
-        quickSort2(nums);
+        quickSort3(nums);
         for (int i : nums) {
             System.out.println(i);
         }
