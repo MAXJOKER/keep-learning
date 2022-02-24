@@ -34,6 +34,9 @@ public class ReverseInteger {
         int y = 0;
         while (x != 0) {
             int tmp = x % 10;
+            // 判断简化，因为x本身会被int限制，当x为正数并且位数和Integer.MAX_VALUE的位数相等时首位最大只能为2，
+            // 所以逆转后不会出现res = Integer.MAX_VALUE / 10 && tmp > 2的情况，自然也不需要判断res==214748364 && tmp>7了
+            // 反之负数情况也一样
             if (y > Integer.MAX_VALUE / 10 || y < Integer.MIN_VALUE / 10) {
                 return 0;
             }
