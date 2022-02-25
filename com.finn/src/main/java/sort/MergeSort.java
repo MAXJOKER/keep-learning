@@ -113,7 +113,9 @@ public class MergeSort {
             return;
         }
 
-        int mid = (left + right) / 2;
+        // (left + right)/2 这种写法在大整数的时候，会发生溢出
+//        int mid = (left + right) / 2;
+        int mid = left + (right - left) / 2;
         mergeSort2(nums, left, mid, temp);
         mergeSort2(nums, mid + 1, right, temp);
 
