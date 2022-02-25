@@ -73,7 +73,7 @@ public class PowxN {
 
     /**
      * 快速幂 + 迭代
-     * 时间复杂度：O(logn) ，即为对 n 进行二进制拆分的时间复杂度。
+     * 时间复杂度：O(logn) ，即为对n进行二进制拆分的时间复杂度
      * 空间复杂度：O(1)
      * @param x
      * @param n
