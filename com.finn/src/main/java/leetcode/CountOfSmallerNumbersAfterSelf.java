@@ -38,6 +38,15 @@ import java.util.Map;
  * 1 <= nums.length <= 105
  * -104 <= nums[i] <= 104
  *
+ *
+ * 时间复杂度：O(NlogN)，数组的元素个数是 N，递归执行分治法，时间复杂度是对数级别的，因此时间复杂度是 O(NlogN)。
+ * 空间复杂度：O(N)，需要 3 个数组，一个索引数组，一个临时数组用于索引数组的归并，还有一个结果数组，它们的长度都是 N，故空间复杂度是 O(N)。
+ *
+ *
+ * 题解：https://leetcode-cn.com/problems/count-of-smaller-numbers-after-self/solution/gui-bing-pai-xu-suo-yin-shu-zu-python-dai-ma-java-/
+ *
+ * 题解最后几张图很好理解
+ *
  */
 public class CountOfSmallerNumbersAfterSelf {
     public static List<Integer> countSmaller(int[] nums) {
@@ -83,6 +92,7 @@ public class CountOfSmallerNumbersAfterSelf {
 
     private static void sortAndCount(int[] nums, int left, int mid, int right, int[] indexes, int[] temp, int[] res) {
         for (int i = left; i <= right; i++) {
+            // 辅助数组初始化，存放的是索引，即我们归并的不是数组元素，而是数组索引，nums仅用来判断是否有逆序对
             temp[i] = indexes[i];
         }
 
@@ -91,15 +101,21 @@ public class CountOfSmallerNumbersAfterSelf {
 
         for (int k = left; k <= right; k++) {
             if (i == mid + 1) {
+                // 左边元素用尽，取右边元素(说明数组都比较有序了，左边都是比较小的)
                 indexes[k] = temp[j];
                 j++;
             } else if (j == right + 1) {
+                // 右边元素用尽，取左边元素(说明数组存在较多的逆序数组 即数组前面的元素比后面的元素大)
                 indexes[k] = temp[i];
                 i++;
+                // indexes[k]可以和右边[mid + 1, right]构成逆序对，长度为right - (mid + 1) + 1，即right - mid
                 res[indexes[k]] += (right - mid);
             } else if (nums[temp[i]] <= nums[temp[j]]) {
                 indexes[k] = temp[i];
                 i++;
+
+                // indexes[k]可以和右边[mid + 1, j)构成逆序对，长度为j - (mid + 1)，即j - mid - 1
+                // j++的条件是 num[temp[i]] > nums[temp[j]]，而 j - (mid + 1) 计算的就是 num[temp[i]] > nums[temp[j]] 的数量
                 res[indexes[k]] += j - mid -1;
             } else {
                 indexes[k] = temp[j];
