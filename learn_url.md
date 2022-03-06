@@ -37,3 +37,9 @@
 #### 牛逼的博主
 * https://www.iteye.com/blog/user/shmilyaw-hotmail-com
 * https://blog.csdn.net/qq_35190492/category_9424379.html
+
+#### 复习资料网站
+https://www.programmercarl.com/
+
+#### 算法
+https://suanfa8.com/
