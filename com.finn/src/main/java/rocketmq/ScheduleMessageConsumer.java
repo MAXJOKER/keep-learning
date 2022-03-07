@@ -1,44 +1,34 @@
 package rocketmq;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.MessageSelector;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
 
 import java.util.List;
 
 /**
  * @author maxjoker
- * @date 2022-03-03 20:43
- * @desc 消费者
+ * @date 2022-03-07 17:46
+ * @desc 延时消费
  */
-public class Consumer {
+public class ScheduleMessageConsumer {
     public static void main(String[] args) throws MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("consumer_group");
         consumer.setNamesrvAddr("localhost:9876");
-        // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         consumer.subscribe("test_topic", "*");
-        // 使用sql筛选订阅消息 a 为 生产者中设置的属性a
-        // consumer.subscribe("test_topic", MessageSelector.bySql("a between 0 and 3"));
-        // 设置每次启动从哪里开始消费
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 
-        // 注册回调实现类来处理从broker拉取回来的消息
+        // 注册消息监听者
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext context) {
-                System.out.println("receive new messages: " + Thread.currentThread().getName());
-
-                for (MessageExt message : list) {
-                    System.out.print("consume message: ");
-                    System.out.println(new String(message.getBody()));
+                for (MessageExt msg : list) {
+                    System.out.println("Receive message[msgId = " + msg.getMsgId() + " ]" +
+                            (System.currentTimeMillis() - msg.getBornTimestamp()) + " ms later.");
                 }
 
-                // 标记该消息已经被成功消费
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
