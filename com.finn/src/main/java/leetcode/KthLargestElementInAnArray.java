@@ -88,8 +88,74 @@ public class KthLargestElementInAnArray {
         nums[index2] = temp;
     }
 
+    public static int findKthLargestByMergeSort(int[] nums, int k) {
+        int len = nums.length;
+        int[] temp = new int[len];
+
+        sortArrayByMergeSort(nums, 0, len - 1, temp);
+        return nums[len - k];
+    }
+
+    /**
+     * 归并排序
+     * @param nums
+     * @param left
+     * @param right
+     * @param temp
+     */
+    public static void sortArrayByMergeSort(int[] nums, int left, int right, int[] temp) {
+        if (left >= right) {
+            return;
+        }
+
+        int mid = (left + right) / 2;
+        sortArrayByMergeSort(nums, left, mid, temp);
+        sortArrayByMergeSort(nums, mid + 1, right, temp);
+
+        if (nums[mid] <= nums[mid + 1]) {
+            return;
+        }
+
+        merge(nums, left, mid, right, temp);
+    }
+
+    private static void merge(int[] nums, int left, int mid, int right, int[] temp) {
+        for (int i = left; i <= right; i++) {
+            temp[i] = nums[i];
+        }
+
+        int i = left;
+        int j = mid + 1;
+        int k = left;
+
+        while (i <= mid && j <= right) {
+            if (temp[i] <= temp[j]) {
+                nums[k] = temp[i];
+                i++;
+                k++;
+            } else {
+                nums[k] = temp[j];
+                j++;
+                k++;
+            }
+        }
+
+        while (i <= mid) {
+            nums[k] = temp[i];
+            i++;
+            k++;
+        }
+
+        while (j <= right) {
+            nums[k] = temp[j];
+            j++;
+            k++;
+        }
+    }
+
     public static void main(String[] args) {
         int[] nums = new int[]{3,2,3,1,2,4,5,5,6};
         System.out.println(findKthLargest(nums, 1));
+        System.out.println(findKthLargestByMergeSort(nums, 3));
     }
 }
