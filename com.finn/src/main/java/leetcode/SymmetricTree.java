@@ -108,6 +108,10 @@ public class SymmetricTree {
 
         return true;
     }
+
+    public static void main(String[] args) {
+        
+    }
 }
 
 class TreeNode2 {
@@ -128,13 +132,27 @@ class TreeNode2 {
 class Tree2 {
     TreeNode2 root;
 
-    public void addNode(int val) {
-        root = addNode(val, root);
+    public TreeNode2 addNode(int val) {
+        return addNode(root, val);
     }
 
-    public TreeNode2 addNode(int val, TreeNode2 current) {
-        if (current == null) {
+    /**
+     * todo 实现一个对称二叉树
+     * @param root
+     * @param val
+     * @return
+     */
+    private TreeNode2 addNode(TreeNode2 root, int val) {
+        if (root == null) {
             return new TreeNode2(val);
         }
+
+        if (val < root.val) {
+            root.left = addNode(root.left, val);
+        } else if (val > root.val) {
+            root.right = addNode(root.right, val);
+        }
+
+        return root;
     }
 }
