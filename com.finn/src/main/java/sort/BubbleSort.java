@@ -10,6 +10,8 @@ package sort;
  * 时间复杂度o(n^2)
  * 空间复杂度o(1)
  *
+ * 稳定排序
+ *
  * https://suanfa8.com/algorithm-basic/basic-sort/bubble/
  *
  */

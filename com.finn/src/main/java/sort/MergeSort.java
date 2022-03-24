@@ -13,6 +13,8 @@ package sort;
  *
  * https://suanfa8.com/merge-sort/merge-sort/
  *
+ * 稳定排序
+ *
  */
 public class MergeSort {
 

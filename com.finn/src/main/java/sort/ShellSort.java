@@ -14,6 +14,8 @@ package sort;
  *
  * 希尔排序是 「分组插入排序」 或者 「带间隔的插入排序」
  *
+ * 不稳定排序
+ *
  */
 public class ShellSort {
     /**

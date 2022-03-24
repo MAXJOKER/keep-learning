@@ -17,8 +17,10 @@ import java.util.Random;
  *
  * # 与归并排序比较 归并排序不管数组的内容是什么，归并排序总是一分为二地去做排序运算，然后再归并起来。
  *
- * 时间复杂度 o(nlogn) 最坏情况o(n^2)
+ * 时间复杂度 o(nlogn) 最坏情况o(n^2) 初始数组有序
  * 空间复杂度 o(nlogn)
+ *
+ * 不稳定排序
  *
  */
 public class QuickSort {
@@ -110,6 +112,7 @@ public class QuickSort {
 
     /**
      * 双指针（指针对撞）快速排序
+     * 把等于切分元素的所有元素等概率地分到了数组的两侧，避免了递归树倾斜，递归树相对平衡；
      * @param nums
      * @return
      */
@@ -220,7 +223,7 @@ public class QuickSort {
 
         swap(nums, left, lt);
         // 大大减少了两侧分治的区间
-        quickSort3(nums, left, lt - 1);
+        quickSort3(nums, left, lt - 1); // lt - 1是因为 上一步交换了left, lt 位置的值，lt位置的值就是他最终应该呆的地方了，不用再排序
         quickSort3(nums, gt, right);
     }
 

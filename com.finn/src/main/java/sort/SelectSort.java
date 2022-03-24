@@ -13,6 +13,8 @@ package sort;
  *  时间复杂度 o(n^2)
  *  空间复杂度 o(1)
  *
+ *  不稳定排序
+ *
  *  https://suanfa8.com/algorithm-basic/basic-sort/selection/
  */
 public class SelectSort {
