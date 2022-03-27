@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.binarytree;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -43,7 +43,7 @@ public class MinimumDepthOfBinaryTree {
      * @param root
      * @return
      */
-    public int minDepthByBfs(TreeNode root) {
+    public int minDepthByBfs(TreeNode1 root) {
         if (root == null) {
             return 0;
         }
@@ -52,7 +52,7 @@ public class MinimumDepthOfBinaryTree {
             return 1;
         }
 
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        Queue<TreeNode1> queue = new LinkedList<TreeNode1>();
         int level = 1;
         queue.offer(root);
 
@@ -60,7 +60,7 @@ public class MinimumDepthOfBinaryTree {
             int size = queue.size();
 
             for (int i = 0; i < size; i++) {
-                TreeNode node = queue.poll();
+                TreeNode1 node = queue.poll();
                 if (node == null || (node.left == null && node.right == null)) {
                     return level;
                 }
@@ -88,7 +88,7 @@ public class MinimumDepthOfBinaryTree {
      * @param root
      * @return
      */
-    public int minDepthByDfs(TreeNode root) {
+    public int minDepthByDfs(TreeNode1 root) {
         if (root == null) {
             return 0;
         }

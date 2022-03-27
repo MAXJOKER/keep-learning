@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.binarytree;
 
 import java.util.ArrayList;
 import java.util.Deque;
@@ -25,7 +25,7 @@ public class BinaryTreeInorderTraversal {
      * @param root
      * @return
      */
-    public static List<Integer> inorderTraversal(TreeNode root) {
+    public static List<Integer> inorderTraversal(TreeNode1 root) {
         if (root == null) {
             return null;
         }
@@ -42,7 +42,7 @@ public class BinaryTreeInorderTraversal {
      * @param root
      * @param result
      */
-    public static void inorderTraversal(TreeNode root, List<Integer> result) {
+    public static void inorderTraversal(TreeNode1 root, List<Integer> result) {
         if (root == null) {
             return;
         }
@@ -59,13 +59,13 @@ public class BinaryTreeInorderTraversal {
      * @param root
      * @return
      */
-    public static List<Integer> inorderTraversalByCycle(TreeNode root) {
+    public static List<Integer> inorderTraversalByCycle(TreeNode1 root) {
         if (root == null) {
             return new ArrayList<>();
         }
 
         List<Integer> result = new ArrayList<>();
-        Deque<TreeNode> stack = new LinkedList<TreeNode>();
+        Deque<TreeNode1> stack = new LinkedList<TreeNode1>();
         while (root != null || !stack.isEmpty()) {
             while (root != null) {
                 stack.push(root);
@@ -93,9 +93,9 @@ public class BinaryTreeInorderTraversal {
      * @param root
      * @return
      */
-    public static List<Integer> inorderTraversalByMorris(TreeNode root) {
+    public static List<Integer> inorderTraversalByMorris(TreeNode1 root) {
         List<Integer> result = new ArrayList<>();
-        TreeNode predecessor = null;
+        TreeNode1 predecessor = null;
 
         while (root != null) {
             if (root.left != null) {
@@ -126,7 +126,7 @@ public class BinaryTreeInorderTraversal {
     }
 
     public static void main(String[] args) {
-        Tree obj = new Tree();
+        Tree1 obj = new Tree1();
         obj.addTreeNode(6);
         obj.addTreeNode(2);
         obj.addTreeNode(1);
@@ -140,36 +140,36 @@ public class BinaryTreeInorderTraversal {
     }
 }
 
-class TreeNode {
+class TreeNode1 {
     int val;
-    TreeNode left;
-    TreeNode right;
+    TreeNode1 left;
+    TreeNode1 right;
 
-    TreeNode() {
+    TreeNode1() {
 
     }
 
-    TreeNode(int val) {
+    TreeNode1(int val) {
         this.val = val;
     }
 
-    TreeNode(int val, TreeNode left, TreeNode right) {
+    TreeNode1(int val, TreeNode1 left, TreeNode1 right) {
         this.val = val;
         this.left = left;
         this.right = right;
     }
 }
 
-class Tree {
-    TreeNode root;
+class Tree1 {
+    TreeNode1 root;
 
     public void addTreeNode(int val) {
         root = addTreeNode(root, val);
     }
 
-    public TreeNode addTreeNode(TreeNode current, int val) {
+    public TreeNode1 addTreeNode(TreeNode1 current, int val) {
         if (current == null) {
-             return new TreeNode(val);
+             return new TreeNode1(val);
         }
 
         if (val < current.val) {
