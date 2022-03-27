@@ -91,7 +91,7 @@ public class QuickSort {
 
         // 基准值
         int pivot = nums[left];
-        int lt = left;
+        int lt = left; // 可以把lt当做是基准值最终要呆的位置 nums[i] < pivot lt要前进并与i位置交换值
 
         // 循环不变量
         // all in [left + 1, lt] < pivot
