@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.binarysearch;
 
 /**
  * @author maxjoker
@@ -57,6 +57,17 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
         return new int[]{-1, -1};
     }
 
+    /**
+     * 时间复杂度：O(logN)
+     * 空间复杂度：O(1)
+     *
+     * 找第一个 -> 找第一个大于或等于target的坐标
+     * 找最后一个 -> 找第一个比target大的数，然后这个数的index - 1 即为最后一个target出现的位置
+     * @param nums
+     * @param target
+     * @param lower
+     * @return
+     */
     public static int binarySearch(int[] nums, int target, boolean lower) {
         int left = 0, right = nums.length - 1, ans = nums.length;
         while (left <= right) {
@@ -70,5 +81,14 @@ public class FindFirstAndLastPositionOfElementInSortedArray {
         }
 
         return ans;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{5, 7, 7, 8, 8, 10};
+        int[] result = searchRange(nums, 8);
+
+        for (int i : result) {
+            System.out.println(i);
+        }
     }
 }
