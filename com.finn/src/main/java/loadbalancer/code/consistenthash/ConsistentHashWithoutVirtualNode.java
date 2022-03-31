@@ -1,4 +1,4 @@
-package loadbalancer.code;
+package loadbalancer.code.consistenthash;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -7,8 +7,13 @@ import java.util.TreeMap;
  * @author maxjoker
  * @date 2022-03-29 16:14
  *
- * 一致性哈希 （无虚拟节点）
+ * 一致性哈希 （无虚拟节点）（版本1）发现有更好的版本，这个就留着吧，不删了
  *
+ * 网上看到有博主说使用String的hashCode方法，计算的hash值聚集在某个区间，可能会导致某台服务器负载会特别大
+ * 重新hash的算法：
+ * FNV1_32_HASH 计算效率高
+ * KETAMA_HASH 是redis推荐的一致性哈希算法
+ * CRC32_HASH
  */
 public class ConsistentHashWithoutVirtualNode {
     /**
