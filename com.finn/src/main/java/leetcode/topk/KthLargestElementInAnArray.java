@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.topk;
 
 import java.util.Random;
 
