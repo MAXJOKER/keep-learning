@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.binarysearch;
 
 /**
  * 69. Sqrt(x)
@@ -74,9 +74,37 @@ public class Sqrtx {
         return result;
     }
 
+    public static int sqrt2(int x) {
+        if (x == 0) {
+            return 0;
+        }
+
+        if (x == 1) {
+            return 1;
+        }
+
+        int left = 0;
+        int right = x / 2;
+
+        while (left < right) {
+            // 如果mid向下取整，当区间只有2个数时，mid的值一直等于left，进入[mid, right]分支会出现死循环
+            int mid = left + (right - left + 1) / 2;
+
+            // mid * mid > x 的话，sqrt值绝不会是mid，值是向下取整的
+            if (x / mid < mid) {
+                right = mid - 1;
+            } else {
+                left = mid;
+            }
+        }
+
+        return left;
+    }
+
     public static void main(String[] args) {
         int x = 8;
         System.out.println(mySqrt(x));
         System.out.println(mySqrt2(x));
+        System.out.println(sqrt2(x));
     }
 }
