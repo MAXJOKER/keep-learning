@@ -75,9 +75,191 @@ public class FindInMountainArray {
         return nums.length;
     }
 
+    /**
+     * 时间复杂度：O(logN)
+     * 空间复杂度：O(1)
+     * @param target
+     * @param nums
+     * @return
+     */
     public static int findInMountainArray(int target, int[] nums) {
+        int peakIndex = findPeakIndex(nums);
+        int right = length(nums) - 1;
+        int result = -1;
+
+        result = findTargetInLeft(nums, 0, peakIndex, target);
+
+        if (result == -1) {
+            result = findTargetInRight(nums, peakIndex, right, target);
+        }
+
+        return result;
+    }
+
+    /**
+     * 右边查找target
+     * @param nums
+     * @param peakIndex
+     * @param right
+     * @param target
+     * @return
+     */
+    private static int findTargetInRight(int[] nums, int peakIndex, int right, int target) {
+        int left = peakIndex;
+
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if (get(nums, mid) > target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        if (get(nums, right) == target) {
+            return right;
+        }
+
+        return -1;
+    }
+
+    /**
+     * 左边查找target
+     * @param nums
+     * @param left
+     * @param peakIndex
+     * @param target
+     * @return
+     */
+    private static int findTargetInLeft(int[] nums, int left, int peakIndex, int target) {
+        int right = peakIndex;
+
+        while (left < right) {
+            int mid = (left + right) / 2;
+            if (get(nums, mid) < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+
+        if (get(nums, left) == target) {
+            return left;
+        }
+
+        return -1;
+    }
+
+    /**
+     * 找出山顶元素
+     * @param nums
+     * @return
+     */
+    public static int findPeakIndex(int[] nums) {
         int len = length(nums);
         int left = 0;
         int right = len - 1;
+
+        while (left < right) {
+            int mid = (left + right) / 2;
+
+            if (get(nums, mid) > get(nums, mid + 1)) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return left;
     }
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{0, 1, 2, 4, 2, 1};
+        System.out.println(findInMountainArray(3, nums));
+    }
+
+    /**
+     * // This is MountainArray's API interface.
+     * // You should not implement it, or speculate about its implementation
+     * interface MountainArray {
+     *     public int get(int index) {}
+     *     public int length() {}
+     * }
+     */
+
+/*
+// leetcode ac 代码
+class Solution {
+        public int findInMountainArray(int target, MountainArray mountainArr) {
+            int peakIndex = findPeakIndex(mountainArr);
+            int right = mountainArr.length() - 1;
+            int result = -1;
+
+            result = findTargetInLeft(mountainArr, 0, peakIndex, target);
+
+            if (result == -1) {
+                result = findTargetInRight(mountainArr, peakIndex, right, target);
+            }
+
+            return result;
+        }
+
+        private int findTargetInRight(MountainArray nums, int peakIndex, int right, int target) {
+            int left = peakIndex;
+
+            while (left < right) {
+                int mid = (left + right) / 2;
+                if (nums.get(mid) > target) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+
+            if (nums.get(right) == target) {
+                return right;
+            }
+
+            return -1;
+        }
+
+        private int findTargetInLeft(MountainArray nums, int left, int peakIndex, int target) {
+            int right = peakIndex;
+
+            while (left < right) {
+                int mid = (left + right) / 2;
+                if (nums.get(mid) < target) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+
+            if (nums.get(left) == target) {
+                return left;
+            }
+
+            return -1;
+        }
+
+        public int findPeakIndex(MountainArray nums) {
+            int len = nums.length();
+            int left = 0;
+            int right = len - 1;
+
+            while (left < right) {
+                int mid = (left + right) / 2;
+
+                if (nums.get(mid) > nums.get(mid + 1)) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+            }
+
+            return left;
+        }
+    }*/
 }
+
+
