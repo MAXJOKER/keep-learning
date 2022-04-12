@@ -91,8 +91,56 @@ public class FindTheDuplicateNumber {
         return 0;
     }
 
+    /**
+     * 标记法
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     * @param nums
+     * @return
+     */
+    public static int findDuplicateByMark(int[] nums) {
+        for (int num : nums) {
+            int idx = Math.abs(num);
+            if (nums[idx] < 0) {
+                return idx;
+            }
+
+            nums[idx] = -nums[idx];
+        }
+
+        return 0;
+    }
+
+    /**
+     * 原地hash
+     * @param nums
+     * @return
+     */
+    public static int findDuplicateByHashInPlace(int[] nums) {
+        int len = nums.length;
+
+        for (int i = 0; i < len;) {
+            int n = nums[i];
+            if (n == i + 1) {
+                i++;
+            } else if (n == nums[n - 1]) {
+                // nums[i] 为 当前位置, nums[nums[i] - 1] 为顺序 1 到 n 中，nums[i] 应当在的位置，如果相等，说明重复了
+                return nums[i];
+            } else {
+                // 不等 交换位置
+                int temp = nums[i];
+                nums[i] = nums[n - 1];
+                nums[n - 1] = temp;
+            }
+        }
+
+        return 0;
+    }
+
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 2, 2, 3, 4};
-        System.out.println(findDuplicate(nums));
+        int[] nums = new int[]{1,3,4,2,2};
+//        System.out.println(findDuplicate(nums));
+//        System.out.println(findDuplicateByMark(nums));
+        System.out.println(findDuplicateByHashInPlace(nums));
     }
 }
