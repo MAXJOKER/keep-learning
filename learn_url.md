@@ -42,4 +42,7 @@
 https://www.programmercarl.com/
 
 #### 算法
-https://suanfa8.com/
+* https://suanfa8.com/
+
+#### java系统学习
+* https://pdai.tech/md/java/basic/java-basic-lan-basic.html
