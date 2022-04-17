@@ -15,30 +15,30 @@ clone顾名思义就是复制， 在Java语言中， clone方法被对象调用�
 
 在Java中，以下类似的代码非常常见：
 ```		
-		Person p = new Person(23, "zhang");
-		Person p1 = p;
+		pdaitech.Person p = new pdaitech.Person(23, "zhang");
+		pdaitech.Person p1 = p;
 		
 		System.out.println(p);
 		System.out.println(p1);
 ```
 
 当Person p1 = p;执行之后， 是创建了一个新的对象吗？ 首先看打印结果：
-com.pansoft.zhangjg.testclone.Person@2f9ee1ac
-com.pansoft.zhangjg.testclone.Person@2f9ee1ac
+com.pansoft.zhangjg.testclone.pdaitech.Person@2f9ee1ac
+com.pansoft.zhangjg.testclone.pdaitech.Person@2f9ee1ac
 
 可已看出，打印的地址值是相同的，既然地址都是相同的，那么肯定是同一个对象。p和p1只是引用而已，他们都指向了一个相同的对象Person(23, "zhang") 。 可以把这种现象叫做引用的复制。 （关于引用和对象的区分，可以参考我之前的文章Java中的String为什么是不可变的？ -- String源码分析 ， 其中有一节讲到了引用和对象的区分）。上面代码执行完成之后， 内存中的情景如下图所示：
 ![alt 1](https://github.com/MAXJOKER/keep-learning/blob/master/image/javaclone1.png?raw=true)
 而下面的代码是真真正正的克隆了一个对象。
 ```
-		Person p = new Person(23, "zhang");
-		Person p1 = (Person) p.clone();
+		pdaitech.Person p = new pdaitech.Person(23, "zhang");
+		pdaitech.Person p1 = (pdaitech.Person) p.clone();
 		
 		System.out.println(p);
 		System.out.println(p1);
 ```
 从打印结果可以看出，两个对象的地址是不同的，也就是说创建了新的对象， 而不是把原对象的地址赋给了一个新的引用变量：
-com.pansoft.zhangjg.testclone.Person@2f9ee1ac
-com.pansoft.zhangjg.testclone.Person@67f1fba0
+com.pansoft.zhangjg.testclone.pdaitech.Person@2f9ee1ac
+com.pansoft.zhangjg.testclone.pdaitech.Person@67f1fba0
 
 以上代码执行完成后， 内存中的情景如下图所示：
 ![alt ](https://github.com/MAXJOKER/keep-learning/blob/master/image/javaclone2.png?raw=true)
@@ -54,17 +54,17 @@ com.pansoft.zhangjg.testclone.Person@67f1fba0
 
 上面的示例代码中，Person中有两个成员变量，分别是name和age， name是String类型， age是int类型。代码非常简单，如下所示：
 ```
-public class Person implements Cloneable{
+public class pdaitech.Person implements Cloneable{
 	
 	private int age ;
 	private String name;
 	
-	public Person(int age, String name) {
+	public pdaitech.Person(int age, String name) {
 		this.age = age;
 		this.name = name;
 	}
 	
-	public Person() {}
+	public pdaitech.Person() {}
  
 	public int getAge() {
 		return age;
@@ -76,7 +76,7 @@ public class Person implements Cloneable{
 	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		return (Person)super.clone();
+		return (pdaitech.Person)super.clone();
 	}
 }
 ```
@@ -86,8 +86,8 @@ public class Person implements Cloneable{
 
 下面通过代码进行验证。如果两个Person对象的name的地址值相同， 说明两个对象的name都指向同一个String对象， 也就是浅拷贝， 而如果两个对象的name的地址值不同， 那么就说明指向不同的String对象， 也就是在拷贝Person对象的时候， 同时拷贝了name引用的String对象， 也就是深拷贝。验证代码如下：
 ```
-		Person p = new Person(23, "zhang");
-		Person p1 = (Person) p.clone();
+		pdaitech.Person p = new pdaitech.Person(23, "zhang");
+		pdaitech.Person p1 = (pdaitech.Person) p.clone();
 		
 		String result = p.getName() == p1.getName() 
 				? "clone是浅拷贝的" : "clone是深拷贝的";
