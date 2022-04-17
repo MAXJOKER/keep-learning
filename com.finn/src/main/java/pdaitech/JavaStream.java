@@ -1,3 +1,5 @@
+package pdaitech;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -74,7 +76,7 @@ public class JavaStream {
         personList.add(new Person("Male", 21));
 
         // 报错 Duplicate key 18，key重复了
-        // Map<String, Integer> personMap = personList.stream().collect(Collectors.toMap(Person::getSex, Person::getAge));
+        // Map<String, Integer> personMap = personList.stream().collect(Collectors.toMap(pdaitech.Person::getSex, pdaitech.Person::getAge));
         /**
          *  toMap 参数，
          * keyMapper：key的映射函数，
@@ -91,7 +93,7 @@ public class JavaStream {
         Map<Integer, Person> personMap1 = personList.stream().collect(Collectors.toMap(Person::getAge, person -> person));
         // 或者
         Map<Integer, Person> personMap2 = personList.stream().collect(Collectors.toMap(Person::getAge, Function.identity()));
-        // sout -> {18=Person(sex=Female, age=18), 19=Person(sex=Male, age=19), 20=Person(sex=Female, age=20), 21=Person(sex=Male, age=21)}
+        // sout -> {18=pdaitech.Person(sex=Female, age=18), 19=pdaitech.Person(sex=Male, age=19), 20=pdaitech.Person(sex=Female, age=20), 21=pdaitech.Person(sex=Male, age=21)}
         System.out.println(personMap1);
         System.out.println(personMap2);
 
@@ -104,7 +106,7 @@ public class JavaStream {
         List<String> sexList = new ArrayList<>(personMap.keySet());
         List<Person> personList1 = personMap1.values().stream().collect(Collectors.toList());
         // sout -> [Male, Female]
-        // sout -> [Person(sex=Female, age=18), Person(sex=Male, age=19), Person(sex=Female, age=20), Person(sex=Male, age=21)]
+        // sout -> [pdaitech.Person(sex=Female, age=18), pdaitech.Person(sex=Male, age=19), pdaitech.Person(sex=Female, age=20), pdaitech.Person(sex=Male, age=21)]
         System.out.println(sexList);
         System.out.println(personList1);
 
@@ -119,22 +121,22 @@ public class JavaStream {
 
         // 排序（升序）
         personList3 = personList3.stream().sorted(Comparator.comparing(Person::getAge)).collect(Collectors.toList());
-        // [Person(sex=Female, age=18), Person(sex=Male, age=19), Person(sex=Female, age=20), Person(sex=Male, age=21)]
+        // [pdaitech.Person(sex=Female, age=18), pdaitech.Person(sex=Male, age=19), pdaitech.Person(sex=Female, age=20), pdaitech.Person(sex=Male, age=21)]
         System.out.println(personList3);
 
         // 排序（降序） reversed() 方法
         personList3 = personList2.stream().sorted(Comparator.comparing(Person::getAge).reversed()).collect(Collectors.toList());
-        // [Person(sex=Male, age=21), Person(sex=Female, age=20), Person(sex=Male, age=19), Person(sex=Female, age=18)]
+        // [pdaitech.Person(sex=Male, age=21), pdaitech.Person(sex=Female, age=20), pdaitech.Person(sex=Male, age=19), pdaitech.Person(sex=Female, age=18)]
         System.out.println(personList3);
 
         // 交换list中的位置
         Collections.swap(personList3, 1,0);
-        // [Person(sex=Female, age=20), Person(sex=Male, age=21), Person(sex=Male, age=19), Person(sex=Female, age=18)]
+        // [pdaitech.Person(sex=Female, age=20), pdaitech.Person(sex=Male, age=21), pdaitech.Person(sex=Male, age=19), pdaitech.Person(sex=Female, age=18)]
         System.out.println(personList3);
 
         // 两个 list 交集
         List<Person> personList4 = personList1.stream().filter(personList3::contains).collect(Collectors.toList());
-        // [Person(sex=Female, age=18), Person(sex=Male, age=19), Person(sex=Female, age=20), Person(sex=Male, age=21)]
+        // [pdaitech.Person(sex=Female, age=18), pdaitech.Person(sex=Male, age=19), pdaitech.Person(sex=Female, age=20), pdaitech.Person(sex=Male, age=21)]
         System.out.println(personList4);
 
         // 两个 list 差集
@@ -148,7 +150,7 @@ public class JavaStream {
         // groupingBy
         // 聚合
         Map<String, List<Person>> pm = personList3.stream().collect(Collectors.groupingBy(Person::getSex));
-        // {Male=[Person(sex=Male, age=21), Person(sex=Male, age=19)], Female=[Person(sex=Female, age=20), Person(sex=Female, age=18)]}
+        // {Male=[pdaitech.Person(sex=Male, age=21), pdaitech.Person(sex=Male, age=19)], Female=[pdaitech.Person(sex=Female, age=20), pdaitech.Person(sex=Female, age=18)]}
         System.out.println(pm);
         // 聚合统计 {Male=2, Female=2}
         Map<String, Long> pc = personList3.stream().collect(Collectors.groupingBy(Person::getSex, Collectors.counting()));
