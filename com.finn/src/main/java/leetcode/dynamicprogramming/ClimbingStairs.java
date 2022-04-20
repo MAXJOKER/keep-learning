@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.dynamicprogramming;
 
 /**
  * 70. 爬楼梯
@@ -27,6 +27,12 @@ package leetcode;
  * https://leetcode-cn.com/problems/climbing-stairs/
  */
 public class ClimbingStairs {
+    /**
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     * @param n
+     * @return
+     */
     public static int climbStairs(int n) {
         int[] methods = new int[n + 1];
 
@@ -47,8 +53,24 @@ public class ClimbingStairs {
         return methods[n];
     }
 
+    /**
+     * 递归实现
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     * 会出现超时
+     * @return
+     */
+    public static int climbStairsByRecursion(int n) {
+        if (n <= 2) {
+            return n;
+        }
+
+        return climbStairsByRecursion(n - 1) + climbStairsByRecursion(n - 2);
+    }
+
     public static void main(String[] args) {
-        int n = 10;
+        int n = 45;
         System.out.println(climbStairs(n));
+        System.out.println(climbStairsByRecursion(n));
     }
 }
