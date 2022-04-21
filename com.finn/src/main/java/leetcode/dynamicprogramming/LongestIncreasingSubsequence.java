@@ -119,7 +119,7 @@ public class LongestIncreasingSubsequence {
         }
 
         // 此时 end 是有序数组 tail 最后一个元素的索引
-        // 题目要求返回的是长度，因此 +1 后返回
+        // 题目要求返回的是长度，因此 +1 后返回 
         end++;
         return end;
     }
