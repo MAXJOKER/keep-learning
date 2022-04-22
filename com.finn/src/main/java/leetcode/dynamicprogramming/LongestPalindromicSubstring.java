@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.dynamicprogramming;
 
 /**
  * @author maxjoker
@@ -110,8 +110,9 @@ public class LongestPalindromicSubstring {
                     dp[i][j] = false;
                 } else {
                     // dp[i][j] 相等，对比子串
+                    // j - i < 3 由 j - 1 - (i + 1) + 1 < 2 得到
                     if (j - i < 3) {
-                        // 子串长度为2，且charArray[i] == charArray[j]，为回文串
+                        // 子串长度严格小于2，且charArray[i] == charArray[j]，为回文串
                         dp[i][j] = true;
                     } else {
                         // 看子串是否为回文串

@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.dynamicprogramming;
 
 /**
  * 53. 最大子数组和
@@ -33,12 +33,10 @@ public class MaximumSubarray {
      * 如果 sum > 0，则说明 sum 对结果有增益效果，则 sum 保留并加上当前遍历数字
      * 如果 sum <= 0，则说明 sum 对结果无增益效果，需要舍弃，则 sum 直接更新为当前遍历数字
      * 每次比较 sum 和 ans的大小，将最大值置为ans，遍历结束返回结果
-     * 时间复杂度：O(n)O(n)
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
      *
-     * 作者：guanpengchn
-     * 链接：https://leetcode-cn.com/problems/maximum-subarray/solution/hua-jie-suan-fa-53-zui-da-zi-xu-he-by-guanpengchn/
-     * 来源：力扣（LeetCode）
-     * 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+     * 题解：https://leetcode-cn.com/problems/maximum-subarray/solution/hua-jie-suan-fa-53-zui-da-zi-xu-he-by-guanpengchn/
      * @param nums
      * @return
      */
