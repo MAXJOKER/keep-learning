@@ -1,7 +1,7 @@
 package pdaitech;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.*;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +114,49 @@ public class JavaAnnotation {
 
         // @Inherited
         // 作用：被它修饰的Annotation将具有继承性。如果某个类使用了被@Inherited修饰的Annotation，则其子类将自动具有该注解。
+        Student stu = new Student();
+        stu.test();
 
+        // @Repeatable
+        // 重复注解：允许在同一申明类型(类，属性，或方法)的多次使用同一个注解
+        RepeatTest repeatTest = new RepeatTest();
+        repeatTest.method();
+        Class clazz = RepeatTest.class;
+        Method[] methods = clazz.getMethods();
+        for (Method method : methods) {
+            System.out.println(method.getName());
+            Annotation[] annotations = method.getDeclaredAnnotations();
+            for (Annotation annotation : annotations) {
+                System.out.println(annotation.toString());
+            }
+        }
+
+        // @Native
+        // 使用 @Native 注解修饰成员变量，则表示这个变量可以被本地代码引用，常常被代码生成工具使用。
+        // 对于 @Native 注解不常使用，了解即可
+
+        // 自定义注解
+        try {
+            Method[] methods1 = ApiReportTest.class.
+                    getClassLoader().
+                    loadClass("pdaitech.ApiReportTest")
+                    .getDeclaredMethods();
+            for (Method method : methods1) {
+                if (method.isAnnotationPresent(ApiReport.class)) {
+                    for (Annotation annotation : method.getDeclaredAnnotations()) {
+                        System.out.println("method: " + method + ", annotation: " + annotation);
+                    }
+
+                    ApiReport apiReport = method.getAnnotation(ApiReport.class);
+                    System.out.println("name: " +apiReport.name());
+                    System.out.println("description: " +apiReport.description());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        // 注解不支持继承
     }
 
     /**
@@ -176,3 +218,69 @@ class B extends A {
 
 @Retention(RetentionPolicy.RUNTIME)
 @interface RetentionRuntime {}
+
+/**
+ * Inherited 测试
+ */
+@Inherited
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+@interface TestInheritedAnnotation {
+    String[] values();
+    int number();
+}
+
+@TestInheritedAnnotation(values = {"value"}, number = 10)
+class P {
+
+}
+
+class Student extends P {
+    public void test() {
+        Class clazz = Student.class;
+        Annotation[] annotations = clazz.getAnnotations();
+        for (Annotation ann : annotations) {
+            System.out.println(ann.toString());
+        }
+    }
+}
+
+/**
+ * @Repeatable 测试
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+@Repeatable(Repeats.class)
+@interface Repeat{
+    String role();
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD})
+@interface Repeats {
+    Repeat[] value();
+}
+
+class RepeatTest {
+    @Repeat(role = "Teacher")
+    @Repeat(role = "Programmer")
+    public void method() {
+    }
+}
+
+/**
+ * 自定义注解
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE, ElementType.METHOD})
+@interface ApiReport {
+    String name();
+    String description();
+}
+
+class ApiReportTest {
+    @ApiReport(name = "apiReport", description = "apiReport test")
+    public void apiReport() {
+        System.out.println("api report");
+    }
+}
