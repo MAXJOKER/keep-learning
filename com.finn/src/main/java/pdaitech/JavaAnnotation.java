@@ -1,5 +1,7 @@
 package pdaitech;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,9 +87,47 @@ public class JavaAnnotation {
         // unused: 抑制没被使用过的代码的警告
 
         // 元注解
-        
+        // JDK 1.5 提供了4个标准的元注解:
+        // @Target, @Retention, @Documented, @Inherited
+        // JDK 1.8 提供了2个元注解：
+        // @Repeatable
+        // @Native
+
+        // @Target
+        // 描述注解的使用范围
+        // 枚举类：java.lang.annotation.ElementType;
+
+        // @Retention
+        // 描述注解保留的时间范围
+        // 枚举类：java.lang.annotation.RetentionPolicy;
+        // SOURCE: 源文件保留
+        // CLASS: 编译器保留，默认值
+        // RUNTIME: 运行时保留，可以通过反射获取注解信息
+        // 测试 javap -verbose JavaAnnotation.class 文件
+        // 可以看到 SOURCE 阶段的方法反编译后
+        // 1. 编译器并没有记录下 retentionSource() 方法的注解信息；
+        // 2. 编译器分别使用了 RuntimeInvisibleAnnotations 和 RuntimeVisibleAnnotations
+        // 属性去记录了retentionClass()方法 和 retentionRuntime()方法 的注解信息；
+
+        // @Documented
+        // 作用：在使用 javadoc 工具为类生成帮助文档时是否要保留其注解信息
+
+        // @Inherited
+        // 作用：被它修饰的Annotation将具有继承性。如果某个类使用了被@Inherited修饰的Annotation，则其子类将自动具有该注解。
 
     }
+
+    /**
+     * Retention 测试
+     */
+    @RetentionSource
+    public void retentionSource() {}
+
+    @RetentionClass
+    public void retentionClass() {}
+
+    @RetentionRuntime
+    public void retentionRuntime() {}
 }
 
 class A {
@@ -123,3 +163,16 @@ class B extends A {
         return list;
     }
 }
+
+
+/**
+ * Retention 测试
+ */
+@Retention(RetentionPolicy.SOURCE)
+@interface RetentionSource {}
+
+@Retention(RetentionPolicy.CLASS)
+@interface RetentionClass {}
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface RetentionRuntime {}
