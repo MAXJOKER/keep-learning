@@ -1,5 +1,14 @@
 package pdaitech;
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+
 import java.lang.annotation.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -16,6 +25,8 @@ import java.util.List;
  */
 public class JavaAnnotation {
     public static void main(String[] args) {
+        // 注解是一个接口，一个继承自Annotation的接口。 里面每一个属性，其实就是接口的一个抽象方法
+
         // 注解是JDK1.5版本开始引入的一个特性，
         // 用于对代码进行说明，可以对包、类、接口、字段、方法参数、局部变量等进行注解。
         // 它主要的作用有以下四方面：
@@ -157,6 +168,27 @@ public class JavaAnnotation {
         }
 
         // 注解不支持继承
+        // 不能使用关键字extends来继承某个@interface，但注解在编译后，编译器会自动继承java.lang.annotation.Annotation接口.
+
+
+        // 注解的应用场景
+        // 1. Spring 框架 配置化到注解化的转变，xml文件配置 到 注解
+        // 2. 继承实现到注解实现 - Junit3到Junit4。
+        // 一个模块的封装大多数类都是通过继承和组合等模式来实现的，但是如果结合注解将可以极大程度提高实现的优雅度（降低耦合度）。
+        // 而Junit3 到Junit4的演化就是最好的一个例子。
+
+        // 自定义注解和AOP - 通过切面实现解耦
+        // 比如接口请求上报，自定义注解 ApiReport，定义切面ReportAspect，切入点为使用ApiReport注解的方法
+        // 在controller的方法中，使用注解ApiReport，代码在下面
+        ApiReportTest apiReportTest = new ApiReportTest();
+        apiReportTest.apiReport();
+
+        // Java注解处理器
+        // 译文：https://www.race604.com/annotation-processing/
+        // 原文：http://hannesdorfmann.com/annotation-processing/annotationprocessing101/
+
+        // TODO 深入底层相关的还需要再找多几篇文章看看
+
     }
 
     /**
@@ -277,6 +309,33 @@ class RepeatTest {
     String name();
     String description();
 }
+
+@Aspect
+@Component
+class ReportAspect {
+    public ReportAspect() {}
+
+    @Pointcut(value = "@annotation(apiReport)", argNames = "apiReport")
+    public void pointcut(ApiReport apiReport) {
+    }
+
+    @Before(value = "pointcut(apiReport)", argNames = "apiReport")
+    public void before(ApiReport apiReport) {
+        System.out.println("@Before");
+    }
+
+    @Around(value = "pointcut(apiReport)", argNames = "joinPoint, apiReport")
+    public Object around(ProceedingJoinPoint joinPoint, ApiReport apiReport) throws Throwable {
+        Object object = new Object();
+        // do something
+        System.out.println("before proceed.");
+        object = joinPoint.proceed();
+        // do something
+        System.out.println("after proceed.");
+        return object;
+    }
+}
+
 
 class ApiReportTest {
     @ApiReport(name = "apiReport", description = "apiReport test")
