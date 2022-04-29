@@ -75,6 +75,11 @@ public class JavaKeyword {
         //      父类(构造函数)
         //      子类(实例变量、普通语句块)
         //      子类(构造函数)
+
+        // transient 关键字
+        // 文章：https://www.cnblogs.com/eternityz/p/15329950.html
+        // https://blog.csdn.net/u012723673/article/details/80699029
+        // https://blog.csdn.net/u010188178/article/details/83581506
     }
 
     class InnerClass {
