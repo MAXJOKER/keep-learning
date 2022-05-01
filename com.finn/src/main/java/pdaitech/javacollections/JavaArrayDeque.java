@@ -19,6 +19,8 @@ public class JavaArrayDeque {
 
         System.out.println(12>>>1); // 结果是 6
 
+        a.removeFirst();
+
         // ArrayDeque底层通过数组实现，为了满足可以同时在数组两端插入或删除元素的需求，该数组还必须是循环的，
         // 即循环数组(circular array)，也就是说数组的任何一点都可能被看作起点或者终点。
         // ArrayDeque是非线程安全的(not thread-safe)，当多个线程同时使用的时候，需要程序员手动同步；
