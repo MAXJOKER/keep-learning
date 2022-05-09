@@ -1,12 +1,10 @@
-package pdaitech;
+package learnjava;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
@@ -150,7 +148,7 @@ public class JavaAnnotation {
         try {
             Method[] methods1 = ApiReportTest.class.
                     getClassLoader().
-                    loadClass("pdaitech.ApiReportTest")
+                    loadClass("learnjava.ApiReportTest")
                     .getDeclaredMethods();
             for (Method method : methods1) {
                 if (method.isAnnotationPresent(ApiReport.class)) {

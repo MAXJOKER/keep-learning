@@ -1,6 +1,5 @@
-package pdaitech;
+package learnjava;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +72,7 @@ public class JavaGeneric {
         try {
             // 为什么要使用泛型方法呢？因为泛型类要在实例化的时候就指明类型，如果想换一种类型，不得不重新new一次，
             // 可能不够灵活；而泛型方法可以在调用的时候指明类型，更加灵活。
-            Object obj = getObject(Class.forName("pdaitech.Point"));
+            Object obj = getObject(Class.forName("learnjava.Point"));
             System.out.println(obj.toString());
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
             System.out.println("get object failed: " + e.getMessage());

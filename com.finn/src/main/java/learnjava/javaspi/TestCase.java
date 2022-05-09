@@ -1,4 +1,4 @@
-package pdaitech.javaspi;
+package learnjava.javaspi;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,4 +1,4 @@
-package pdaitech;
+package learnjava;
 
 /**
  * @author maxjoker

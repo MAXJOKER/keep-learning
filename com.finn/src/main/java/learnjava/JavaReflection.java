@@ -1,4 +1,4 @@
-package pdaitech;
+package learnjava;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -49,7 +49,7 @@ public class JavaReflection {
         // 3. 根据全限定类名：Class.forName(全限定类名)
         System.out.println("根据类名：" + UserInfo.class);
         System.out.println("根据对象：" + new UserInfo().getClass());
-        System.out.println("根据全限定类名：" + Class.forName("pdaitech.JavaReflection"));
+        System.out.println("根据全限定类名：" + Class.forName("learnjava.JavaReflection"));
 
         // Class类的方法
         // forName(): (1)获取Class对象的一个引用，但引用的类还没加载就加载了这个类；(2)为了产生Class引用，forName()立即就进行了**初始化**
@@ -69,7 +69,7 @@ public class JavaReflection {
         System.out.println("获取全限定类名1：" + UserInfo.class.getName());
         System.out.println("获取全限定类名2：" + UserInfo.class.getCanonicalName());
         System.out.println("获取类名：" + new UserInfo().getClass().getSimpleName());
-        System.out.println("实例化：" + Class.forName("pdaitech.JavaReflection").newInstance());
+        System.out.println("实例化：" + Class.forName("learnjava.JavaReflection").newInstance());
         System.out.println("是否为接口：" + UserInfo.class.isInterface());
         System.out.println("获取实现的接口：" + UserInfo.class.getInterfaces());
         System.out.println("获取继承的基类：" + UserInfo.class.getSuperclass());
@@ -94,7 +94,7 @@ public class JavaReflection {
         // newInstance(): 调用无参构造器创建此 Class 对象所表示的类的一个新实例
 
         Class<?> clazz = null;
-        clazz = Class.forName("pdaitech.UserInfo");
+        clazz = Class.forName("learnjava.UserInfo");
         UserInfo userInfo = (UserInfo) clazz.newInstance();
         userInfo.setName("a");
         userInfo.setAge(18);

@@ -1,6 +1,4 @@
-package pdaitech.javacollections;
-
-import java.util.PriorityQueue;
+package learnjava.javacollections;
 
 /**
  * @author maxjoker

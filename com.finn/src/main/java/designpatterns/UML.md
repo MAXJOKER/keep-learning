@@ -311,7 +311,7 @@ UML 将事物之间的联系归纳为 6 种，并用对应的图形类表示。�
 泛化（Generalization）关系是对象之间耦合度最大的一种关系，表示一般与特殊的关系，是父类与子类之间的关系，是一种继承关系，是 is-a 的关系。
 
 在 UML 类图中，泛化关系用带空心三角箭头的实线来表示，箭头从子类指向父类。在代码实现时，使用面向对象的继承机制来实现泛化关系。
-例如，Student 类和 Teacher 类都是 pdaitech.Person 类的子类，其类图如下所示。
+例如，Student 类和 Teacher 类都是 learnjava.Person 类的子类，其类图如下所示。
 
 <img src = "http://c.biancheng.net/uploads/allimg/181112/3-1Q1121Q62C57.gif">
 

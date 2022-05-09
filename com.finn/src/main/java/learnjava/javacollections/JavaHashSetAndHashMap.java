@@ -1,7 +1,6 @@
-package pdaitech.javacollections;
+package learnjava.javacollections;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 /**
  * @author maxjoker

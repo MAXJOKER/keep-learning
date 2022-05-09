@@ -1,4 +1,4 @@
-package pdaitech;
+package learnjava;
 
 import java.io.*;
 import java.net.HttpURLConnection;

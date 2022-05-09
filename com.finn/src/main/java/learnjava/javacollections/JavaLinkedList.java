@@ -1,4 +1,4 @@
-package pdaitech.javacollections;
+package learnjava.javacollections;
 
 import java.util.Iterator;
 import java.util.LinkedList;
