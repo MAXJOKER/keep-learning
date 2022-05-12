@@ -513,6 +513,58 @@ public class JavaHashSetAndHashMap {
         //                     -1 : 1);
         //            return d;
         //        }
+        //
+        //         // 平衡红黑树 (这个很重要)
+        //         static <K,V> TreeNode<K,V> balanceInsertion(TreeNode<K,V> root, TreeNode<K,V> x) {
+        //            x.red = true;
+        //            for (TreeNode<K,V> xp, xpp, xppl, xppr;;) {
+        //                if ((xp = x.parent) == null) {
+        //                    x.red = false;
+        //                    return x;
+        //                } else if (!xp.red || (xpp = xp.parent) == null) {
+        //                    return root;
+        //                }
+        //                if (xp == (xppl = xpp.left)) {
+        //                    if ((xppr = xpp.right) != null && xppr.red) {
+        //                        xppr.red = false;
+        //                        xp.red = false;
+        //                        xpp.red = true;
+        //                        x = xpp;
+        //                    } else {
+        //                        if (x == xp.right) {
+        //                            root = rotateLeft(root, x = xp);
+        //                            xpp = (xp = x.parent) == null ? null : xp.parent;
+        //                        }
+        //                        if (xp != null) {
+        //                            xp.red = false;
+        //                            if (xpp != null) {
+        //                                xpp.red = true;
+        //                                root = rotateRight(root, xpp);
+        //                            }
+        //                        }
+        //                    }
+        //                } else {
+        //                    if (xppl != null && xppl.red) {
+        //                        xppl.red = false;
+        //                        xp.red = false;
+        //                        xpp.red = true;
+        //                        x = xpp;
+        //                    } else {
+        //                        if (x == xp.left) {
+        //                            root = rotateRight(root, x = xp);
+        //                            xpp = (xp = x.parent) == null ? null : xp.parent;
+        //                        }
+        //                        if (xp != null) {
+        //                            xp.red = false;
+        //                            if (xpp != null) {
+        //                                xpp.red = true;
+        //                                root = rotateLeft(root, xpp);
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
 
     }
 }
