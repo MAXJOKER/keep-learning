@@ -174,11 +174,55 @@ public class TopKFrequentElements {
         }
     }
 
+    /**
+     * 桶排序
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public static int[] findTopKByBucketSort(int[] nums, int k) {
+        int len = nums.length;
+        // 使用字典，统计每个元素出现的次数，元素为键，元素出现的次数为值
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        //桶排序
+        //将频率作为数组下标，对于出现频率不同的数字集合，存入对应的数组下标
+        List<Integer>[] list = new List[len + 1];
+        for(int key : map.keySet()) {
+            // 获取出现的次数作为下标
+            int i = map.get(key);
+            if (list[i] == null) {
+                list[i] = new ArrayList<>();
+            }
+
+            list[i].add(key);
+        }
+
+        List<Integer> res = new ArrayList<>();
+        // 倒序遍历数组获取出现顺序从大到小的排列
+        for (int i = list.length - 1; i >= 0 && res.size() < k; i--) {
+            if (list[i] == null) {
+                continue;
+            }
+
+            res.addAll(list[i]);
+        }
+
+        return res.stream().mapToInt(Integer::intValue).toArray();
+    }
+
     public static void main(String[] args) {
-        int[] nums = new int[]{1,1,1,2,2,3};
+        int[] nums = new int[]{1,1,1,2,2,3,3,3,3};
         int[] result = topKFrequent(nums, 2);
         int[] result2 = topKFrequentByHeap(nums, 3);
         int[] result3 = topKFrequentByQuickSort(nums, 1);
+        int[] result4 = findTopKByBucketSort(nums, 2);
         for (int i : result) {
             System.out.println(i);
         }
@@ -188,6 +232,10 @@ public class TopKFrequentElements {
         }
 
         for (int i : result3) {
+            System.out.println(i);
+        }
+
+        for (int i : result4) {
             System.out.println(i);
         }
     }
