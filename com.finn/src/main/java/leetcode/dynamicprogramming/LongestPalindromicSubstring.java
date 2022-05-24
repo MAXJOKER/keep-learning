@@ -95,7 +95,9 @@ public class LongestPalindromicSubstring {
         }
 
         char[] charArray = s.toCharArray();
+        // dp[i][j] 表示 s[i..j] 是否是回文串
         Boolean[][] dp = new Boolean[len][len];
+        // 初始化：所有长度为 1 的子串都是回文串
         for (int i = 0; i < len; i++) {
             dp[i][i] = true;
         }
@@ -103,6 +105,7 @@ public class LongestPalindromicSubstring {
         int maxLen = 1;
         int begin = 0;
 
+        // 这里往左侧开始逐渐缩小范围检测
         for (int j = 1; j < len; j++) {
             for (int i = 0; i < j; i++) {
                 // left，right字符不等，肯定不是回文
@@ -112,7 +115,7 @@ public class LongestPalindromicSubstring {
                     // dp[i][j] 相等，对比子串
                     // j - i < 3 由 j - 1 - (i + 1) + 1 < 2 得到
                     if (j - i < 3) {
-                        // 子串长度严格小于2，且charArray[i] == charArray[j]，为回文串
+                        // 子串长度严格小于2，且charArray[i] == charArray[j]，为回文串，这里其实就是 bab 这样的例子
                         dp[i][j] = true;
                     } else {
                         // 看子串是否为回文串
@@ -168,7 +171,7 @@ public class LongestPalindromicSubstring {
             right++;
         }
 
-        // 最后一次循环，left--, right++，所以最后结果需要减2, right - left + 1 - 2;
+        // 最后一次循环，left--, right++，所以最后结果需要减2, (right - 1) - (left + 1) + 1;
         // 返回起始位置 和 长度
         return new int[]{left + 1, right - left - 1};
     }
