@@ -52,12 +52,14 @@ public class longestConsecutiveSequence {
                 int currentLongest = 1;
                 int current = num;
                 while (set.remove(current - 1)) {
+                    // 关键的一步，往下看是否有连续的数字
                     current--;
                 }
                 currentLongest += num - current;
 
                 current = num;
                 while (set.remove(current + 1)) {
+                    // 也是关键的一步，往上看是否有连续的数字
                     current++;
                 }
                 currentLongest += current - num;
