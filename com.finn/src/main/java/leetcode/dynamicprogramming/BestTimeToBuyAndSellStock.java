@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.dynamicprogramming;
 
 /**
  * 121. 买卖股票的最佳时机
@@ -67,8 +67,42 @@ public class BestTimeToBuyAndSellStock {
         return maxProfit;
     }
 
+    /**
+     * 状态：
+     * dp[i][0] 今天不持股
+     *      （1）昨天不持股
+     *      （2）昨天买入，今天卖出
+     *
+     * dp[i][1] 今天持股
+     *      （1）昨天不持股，今天买入
+     *      （2）昨天买入
+     *
+     * 状态转移方程：
+     *      dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + price[i])
+     *      dp[i][1] = max(dp[i - 1][1], -price[i])
+     *
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     * @param prices
+     * @return
+     */
+    public static int maxProfit3(int[] prices) {
+        int len = prices.length;
+        int[][] dp = new int[len][2];
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
+
+        for (int i = 1; i < len; i++) {
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(-prices[i], dp[i - 1][1]);
+        }
+
+        return dp[len - 1][0];
+    }
+
     public static void main(String[] args) {
-        int[] prices = {7,6,4,3,1};
+        int[] prices = {1,6,4,3,1};
         System.out.println(maxProfit2(prices));
+        System.out.println(maxProfit3(prices));
     }
 }

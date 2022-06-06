@@ -1,4 +1,4 @@
-package leetcode;
+package leetcode.dynamicprogramming;
 
 /**
  * 122. 买卖股票的最佳时机 II
@@ -34,6 +34,8 @@ public class BestTimeToBuyAndSellStock2 {
 
     /**
      * 动态规划
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(n)
      * @param prices
      * @return
      */
@@ -52,10 +54,10 @@ public class BestTimeToBuyAndSellStock2 {
         dp[0][0] = 0;
         /**
          * dp[i][1]
-         * 规定了今天不持股，有以下两种情况：
+         * 规定了今天持股，有以下两种情况：
          *
-         * 1. 昨天不持股，今天什么都不做；
-         * 2. 昨天持股，今天卖出股票（现金数增加）或者 昨天不持股，今天买入
+         * 1. 昨天持股，今天什么都不做；
+         * 2. 昨天不持股，今天买入
          */
         dp[0][1] = -prices[0];
 
@@ -66,11 +68,25 @@ public class BestTimeToBuyAndSellStock2 {
             dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
         }
 
+        // 由于全部交易结束后，持有股票的收益一定低于不持有股票的收益，
+        // 因此这时候 dp[n-1][0] 的收益必然是大于 dp[n−1][1] 的，
+        // 最后的答案即为 dp[n−1][0]
         return dp[prices.length - 1][0];
     }
 
     /**
      * 贪心算法
+     * 时间复杂度：O(n)
+     * 空间复杂度：O(1)
+     *
+     * 贪心算法: 在每一步总是做出在当前看来最好的选择。
+     * 这道题 「贪心」 的地方在于，对于 「今天的股价 - 昨天的股价」，
+     * 得到的结果有 3 种可能：
+     *      ① 正数
+     *      ② 0
+     *      ③负数
+     * 贪心算法的决策是： 只加正数
+     *
      * @param prices
      * @return
      */
